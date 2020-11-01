@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
+using BusinessLayer;
 
 namespace QuizManager
 {
@@ -37,6 +37,7 @@ namespace QuizManager
         private void courseListBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
             CategoryQuizItems_ListBox.ItemsSource = null;
+            modulesListBox.UnselectAll();
             var item = (ListBox)sender;
             if(item.SelectedItem != null)
             {
@@ -144,17 +145,20 @@ namespace QuizManager
 
         private void Link_ButtonClick(object sender, RoutedEventArgs e)
         {
-            if( new List<object> { 
-                courseListBox.SelectedItem,
-                allQuizItems_ListBox.SelectedItem,
-                modulesListBox.SelectedItems}
-            .TrueForAll(x=>x !=null))
+            //if( new List<object> { 
+            //    courseListBox.SelectedItem,
+            //    allQuizItems_ListBox.SelectedItem,
+            //    modulesListBox.SelectedItems}
+            //.TrueForAll(x=>x !=null))
+            if(courseListBox.SelectedItem != null && allQuizItems_ListBox.SelectedItem !=null  && modulesListBox.SelectedItems.Count >0)
             {
                 QuizItem quiz =
                     quizesManager.GetQuizItemById(((KeyValuePair<int, string>)allQuizItems_ListBox.SelectedItem).Key);
-                quiz.LinkQuiz(
+                bool result = quiz.LinkQuiz(
                     (courseListBox.SelectedItem as Course).CourseID,
                     modulesListBox.SelectedItems.Cast<string>().ToList());
+                string s = result == true ?"Done" : "Something went wrong. Could'nt link quizes with modules";
+                MessageBox.Show(s);
             }
         }
 

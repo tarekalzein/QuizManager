@@ -6,9 +6,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuizManager
+namespace BusinessLayer
 {
-    class QuizItem
+    public class QuizItem
     {
 
         public int ID { get; set; }

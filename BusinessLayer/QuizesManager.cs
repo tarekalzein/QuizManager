@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace QuizManager
+namespace BusinessLayer
 {
-    class QuizesManager
+    public class QuizesManager
     {
         private int id;
         List<QuizItem> Quizes;
