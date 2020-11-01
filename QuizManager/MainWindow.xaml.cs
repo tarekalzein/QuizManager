@@ -106,10 +106,8 @@ namespace QuizManager
                 int id = ((KeyValuePair<int, string>)item).Key;
                 QuizItem quiz = quizesManager.GetQuizItemById(id);
                 quizesManager.RemoveQuizItem(quiz);
-                //allQuizItems_ListBox.ItemsSource =
-                //    quizesManager.ConvertQuizListToStringList(quizesManager.GetAllQuizItems());
-                allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
 
+                allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
 
                 quizItem_TextBox.Clear();
             }

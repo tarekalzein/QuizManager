@@ -100,25 +100,40 @@
                 <!--QuizItems grid-->
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="50"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <TabControl x:Name="tabControl" Margin="5">
+                    <TabControl Margin="5">
                         <TabItem Header="Show all categories">
-                            <ListBox x:Name="allQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Margin="5 0" Text="{Binding Key}"/>
-                                            <TextBlock Margin="5 0" Text="{Binding Value}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <ListBox x:Name="allQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Margin="5 0" Text="{Binding Key}"/>
+                                                    <TextBlock Margin="5 0" Text="{Binding Value}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Width="80" Margin="5" Click="AddQuiz_ButtonClick">Add new</Button>
+                                        <Button Width="80" Margin="5" Click="UpdateText_ButtonClick">Update Text</Button>
+                                        <Button Width="80" Margin="5" Click="RemoveQuiz_ButtonClick">Delete</Button>
+                                        <Button Width="80" Margin="5" Click="CopyText_ButtonClick">Copy</Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Show for subcategory">
-                            <ListBox x:Name="CategoryQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged" Height="258" Width="380">
+                            <ListBox x:Name="CategoryQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -132,15 +147,8 @@
                         
                     </TabControl>
                 </Grid>
+
                 <Grid Grid.Row="1">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Width="80" Margin="5" Click="AddQuiz_ButtonClick">Add new</Button>
-                        <Button Width="80" Margin="5" Click="UpdateText_ButtonClick">Update Text</Button>
-                        <Button Width="80" Margin="5" Click="RemoveQuiz_ButtonClick">Delete</Button>
-                        <Button Width="80" Margin="5" Click="CopyText_ButtonClick">Copy</Button>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Row="2">
                     <TextBox x:Name="quizItem_TextBox" Margin="10" AcceptsReturn="True"></TextBox>
                 </Grid>
             </Grid>
