@@ -5,8 +5,166 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuizManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="696.436" Width="1193.243">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <!--menu grid-->
+            <StackPanel Orientation="Horizontal">
+                <Menu Background="Transparent" VerticalAlignment="Center">
+                    <MenuItem Header="File">
+
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <!--courses grid-->
+                <StackPanel>
+                    <GroupBox Header="GroupBox" >
+                        <StackPanel>
+                            <GroupBox Header="New Courses" Height="200" Margin="5">
+                                <StackPanel>
+                                    <DockPanel LastChildFill="False" Margin="5">
+                                        <Label>ID</Label>
+                                        <TextBox x:Name="courseId_textBox" Width="200" DockPanel.Dock="Right" VerticalContentAlignment="Center"></TextBox>
+                                    </DockPanel>
+                                    <DockPanel LastChildFill="False" Margin="5">
+                                        <Label>Name</Label>
+                                        <TextBox x:Name="courseName_textBox" Width="200" DockPanel.Dock="Right" VerticalContentAlignment="Center"></TextBox>
+                                    </DockPanel>
+                                    <DockPanel LastChildFill="False" Margin="5 8 5 0">
+                                        <Label>Moments</Label>
+                                        <TextBox x:Name="courseMoments_textBox" Width="220" DockPanel.Dock="Right" VerticalContentAlignment="Center" ></TextBox>
+                                    </DockPanel>
+                                    <Label Foreground="Red" HorizontalAlignment="Right" Margin="0">*Use ';' as delimeter, Ex: Module1;Module2;Modul3</Label>
+                                    <Button Width="150" Margin="5 10" Click="AddCourse_ButtonClick">Add New Course</Button>
+                                </StackPanel>
+
+                            </GroupBox>
+                            <Grid Height="300">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="225"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox x:Name="courseListBox" Grid.Column="0" Margin="5" HorizontalContentAlignment="Stretch" 
+                                         ItemsSource="{Binding}" SelectionChanged="courseListBox_SelectionChanged" >
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid Grid.Column="0">
+                                                    <TextBlock Text="{Binding CourseName}"/>
+                                                </Grid>
+                                                <Grid Grid.Column="1">
+                                                    <TextBlock Text="{Binding CourseID}" Foreground="Gray" HorizontalAlignment="Right"/>
+                                                </Grid>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <ListBox  x:Name="modulesListBox" Grid.Column="1" Margin="5" HorizontalContentAlignment="Stretch"
+                                          SelectionMode="Multiple" SelectionChanged="modulesListBox_SelectionChanged">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+
+                            </Grid>
+                            <Separator Margin="5"/>
+                            <Button Margin="5" HorizontalAlignment="Left" MinWidth="225" Click="RemoveCourse_ButtonClick">Delete Course</Button>
+                            <CheckBox x:Name="checkBox" Margin="5" HorizontalAlignment="Right" Checked="CheckBox_Toggle" Unchecked="CheckBox_Toggle">Link Mode</CheckBox>
+                            <Button x:Name="linkButton" Margin="5 10" Click="Link_ButtonClick" >Link item to a Cat or Cat/Sub category</Button>
+                        </StackPanel>
+                    </GroupBox>
+
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <!--QuizItems grid-->
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TabControl x:Name="tabControl" Margin="5">
+                        <TabItem Header="Show all categories">
+                            <ListBox x:Name="allQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="5 0" Text="{Binding Key}"/>
+                                            <TextBlock Margin="5 0" Text="{Binding Value}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </TabItem>
+                        <TabItem Header="Show for subcategory">
+                            <ListBox x:Name="CategoryQuizItems_ListBox" SelectionChanged="allQuizItems_ListBox_SelectionChanged" Height="258" Width="380">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="5 0" Text="{Binding Key}"/>
+                                            <TextBlock Margin="5 0" Text="{Binding Value}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </TabItem>
+                        
+                    </TabControl>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="80" Margin="5" Click="AddQuiz_ButtonClick">Add new</Button>
+                        <Button Width="80" Margin="5" Click="UpdateText_ButtonClick">Update Text</Button>
+                        <Button Width="80" Margin="5" Click="RemoveQuiz_ButtonClick">Delete</Button>
+                        <Button Width="80" Margin="5" Click="CopyText_ButtonClick">Copy</Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <TextBox x:Name="quizItem_TextBox" Margin="10" AcceptsReturn="True"></TextBox>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="2">
+                <!--Copied Texts something grid-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Label>Quiz Texts</Label>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ListBox x:Name="quizTexts_ListBox" Margin="10 0"></ListBox>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <DockPanel LastChildFill="False">
+                        <Button Content=" &lt;&lt; Clear text " Margin="8" Click="ClearText_ButtonClick"></Button>
+                        <Button  DockPanel.Dock="Right" Content="Copy above content to clipboard" Margin="8" Width="250" Click="CopyToClipboard_ButtonClick"></Button>
+
+                    </DockPanel>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
