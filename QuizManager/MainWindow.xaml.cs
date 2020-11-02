@@ -22,8 +22,11 @@ namespace QuizManager
             InitializeComponent();
             linkButton.IsEnabled = false;
 
-            courseListBox.ItemsSource = courseManager.GetCourses();
-            allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+            //courseListBox.ItemsSource = courseManager.GetCourses();
+            //allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+
+            FillListBox(courseListBox, courseManager.GetCourses());
+            FillListBox(allQuizItems_ListBox, quizesManager.GetAllQuizItemsAsStrings());
         }
 
         private void AddCourse_ButtonClick(object sender, RoutedEventArgs e)
@@ -192,12 +195,17 @@ namespace QuizManager
                     courseManager = container.CourseManager;
                     quizesManager = container.QuizesManager;
 
-                    courseListBox.ItemsSource = courseManager.GetCourses();
-                    allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                    //courseListBox.ItemsSource = courseManager.GetCourses();
+                    //allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                    FillListBox(courseListBox, courseManager.GetCourses());
+                    FillListBox(allQuizItems_ListBox, quizesManager.GetAllQuizItemsAsStrings());
                 }
                 else
                     MessageBox.Show(err);
             }                        
         }
+
+        private Action<ListBox, dynamic> FillListBox = (listBox, dataSource) => listBox.ItemsSource = dataSource;
+
     }
 }
