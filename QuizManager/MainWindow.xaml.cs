@@ -69,7 +69,9 @@ namespace QuizManager
                     stringToArray(quizItem_TextBox.Text,new[] {'\r','\n'}));
 
                 quizesManager.AddQuizItem(quiz);
-                allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                //allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                FillListBox(allQuizItems_ListBox, quizesManager.GetAllQuizItemsAsStrings());
+
 
                 quizItem_TextBox.Clear();
             }
@@ -97,7 +99,9 @@ namespace QuizManager
                 QuizItem quiz = quizesManager.GetQuizItemById(id);
                 quiz.EditQuizDescriptionStrings(
                     stringToArray(quizItem_TextBox.Text, new[] { '\r', '\n' }));
-                allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                //allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                FillListBox(allQuizItems_ListBox, quizesManager.GetAllQuizItemsAsStrings());
+
 
             }
         }
@@ -111,7 +115,9 @@ namespace QuizManager
                 QuizItem quiz = quizesManager.GetQuizItemById(id);
                 quizesManager.RemoveQuizItem(quiz);
 
-                allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                //allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                FillListBox(allQuizItems_ListBox, quizesManager.GetAllQuizItemsAsStrings());
+
 
                 quizItem_TextBox.Clear();
             }
