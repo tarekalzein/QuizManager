@@ -16,7 +16,10 @@
             <StackPanel Orientation="Horizontal">
                 <Menu Background="Transparent" VerticalAlignment="Center">
                     <MenuItem Header="File">
-
+                        <MenuItem Header="Open" Click="Open_MenuClick"/>
+                        <MenuItem Header="Save" Click="Save_MenuClick"/>
+                        <Separator/>
+                        <MenuItem Header="Exit"/>
                     </MenuItem>
                 </Menu>
             </StackPanel>

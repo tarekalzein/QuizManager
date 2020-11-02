@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using BusinessLayer;
+using DataAccessLayer;
+using Microsoft.Win32;
 
 namespace QuizManager
 {
@@ -145,11 +147,7 @@ namespace QuizManager
 
         private void Link_ButtonClick(object sender, RoutedEventArgs e)
         {
-            //if( new List<object> { 
-            //    courseListBox.SelectedItem,
-            //    allQuizItems_ListBox.SelectedItem,
-            //    modulesListBox.SelectedItems}
-            //.TrueForAll(x=>x !=null))
+
             if(courseListBox.SelectedItem != null && allQuizItems_ListBox.SelectedItem !=null  && modulesListBox.SelectedItems.Count >0)
             {
                 QuizItem quiz =
@@ -157,7 +155,7 @@ namespace QuizManager
                 bool result = quiz.LinkQuiz(
                     (courseListBox.SelectedItem as Course).CourseID,
                     modulesListBox.SelectedItems.Cast<string>().ToList());
-                string s = result == true ?"Done" : "Something went wrong. Could'nt link quizes with modules";
+                string s = result == true ? "Done" : "Something went wrong. Could'nt link quizes with modules";
                 MessageBox.Show(s);
             }
         }
@@ -173,6 +171,36 @@ namespace QuizManager
                     modulesListBox.SelectedItems.Cast<string>().ToList()
                     );
             }
+        }
+
+        private void Save_MenuClick(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                bool result = SerializationHelper.Serialize(courseManager, quizesManager, saveFileDialog.FileName);
+                string message = result ? "Saved!" : "Something went wrong while saving the file";
+                MessageBox.Show(message);
+            }            
+        } 
+        private void Open_MenuClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string err = "";
+                ManagersContainer container = SerializationHelper.Deserialize(openFileDialog.FileName, out err);
+                if (string.IsNullOrEmpty(err))
+                {
+                    courseManager = container.CourseManager;
+                    quizesManager = container.QuizesManager;
+
+                    courseListBox.ItemsSource = courseManager.GetCourses();
+                    allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
+                }
+                else
+                    MessageBox.Show(err);
+            }                        
         }
     }
 }

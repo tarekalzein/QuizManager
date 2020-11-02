@@ -5,6 +5,7 @@ using System.Net;
 
 namespace BusinessLayer
 {
+    [Serializable]
     public class QuizesManager
     {
         private int id;

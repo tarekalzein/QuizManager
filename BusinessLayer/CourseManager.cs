@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace BusinessLayer
 {
+    [Serializable]
     public class CourseManager
     {
         ObservableCollection<Course> Courses;
