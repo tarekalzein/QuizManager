@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
+    /// <summary>
+    /// Utility class to contain CourseManager and QuizesManager for serialization and deserialization.
+    /// </summary>
     [Serializable]
     public class ManagersContainer
     {

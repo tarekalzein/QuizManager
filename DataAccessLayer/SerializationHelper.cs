@@ -7,14 +7,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace DataAccessLayer
 {
     public class SerializationHelper
-    {        
+    {
         //private static string targetFile = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + "/data.bin";
 
         /// <summary>
-        /// Serializer Method that takes an instance of album manager and serialize its content to a file data.bin
+        /// Serializer Method that takes an instance of ManagerContainer and serialize its content to a given fileName
         /// </summary>
-        /// <param name="albumManager">Instance of AlbumManager that contains the data to save</param>
-        /// <returns>returns bool (true on success)</returns>
+        /// <param name="c">CourseManager instance to serialize</param>
+        /// <param name="q">QuizesManager instance to serialize</param>
+        /// <param name="targetFile"> the desired bin file name and location</param>
+        /// <returns>true on success, false on failure</returns>
         public static bool Serialize(CourseManager c, QuizesManager q, string targetFile)
         {
             ManagersContainer container = new ManagersContainer(c, q);
@@ -38,10 +40,11 @@ namespace DataAccessLayer
         }
 
         /// <summary>
-        /// Deserializer method that reads the data.bin file in root (if exists) and retrieve its data.
+        /// Method to Deserialize a given file name into application data..
         /// </summary>
-        /// <param name="errorMessage"></param>
-        /// <returns>instance of retrieved ablum manager</returns>
+        /// <param name="targetFile">The data file</param>
+        /// <param name="errorMessage">Deserialization error message</param>
+        /// <returns></returns>
         public static ManagersContainer Deserialize(string targetFile,out string errorMessage)
         {
             FileStream fileStream = null;

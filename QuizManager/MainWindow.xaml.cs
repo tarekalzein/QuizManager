@@ -66,8 +66,6 @@ namespace QuizManager
                     stringToArray(quizItem_TextBox.Text,new[] {'\r','\n'}));
 
                 quizesManager.AddQuizItem(quiz);
-                //allQuizItems_ListBox.ItemsSource = 
-                //    quizesManager.ConvertQuizListToStringList(quizesManager.GetAllQuizItems());
                 allQuizItems_ListBox.ItemsSource = quizesManager.GetAllQuizItemsAsStrings();
 
                 quizItem_TextBox.Clear();
@@ -172,7 +170,6 @@ namespace QuizManager
                     );
             }
         }
-
         private void Save_MenuClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
